@@ -13,7 +13,7 @@ and libcurl.
 
 ## QUIC libraries
 
-QUIC libraries we're experimenting with:
+QUIC libraries we are experimenting with:
 
 [ngtcp2](https://github.com/ngtcp2/ngtcp2)
 
@@ -69,7 +69,7 @@ Build curl
      % make
      % make install
 
-For OpenSSL 3.0.0 or later builds on Linux for x86_64 architecture, substitute all occurances of "/lib" with "/lib64"
+For OpenSSL 3.0.0 or later builds on Linux for x86_64 architecture, substitute all occurrences of "/lib" with "/lib64"
 
 ## Build with GnuTLS
 
@@ -120,9 +120,9 @@ Build quiche and BoringSSL:
 
      % git clone --recursive https://github.com/cloudflare/quiche
      % cd quiche
-     % cargo build --release --features ffi,pkg-config-meta,qlog
-     % mkdir deps/boringssl/src/lib
-     % ln -vnf $(find target/release -name libcrypto.a -o -name libssl.a) deps/boringssl/src/lib/
+     % cargo build --package quiche --release --features ffi,pkg-config-meta,qlog
+     % mkdir quiche/deps/boringssl/src/lib
+     % ln -vnf $(find target/release -name libcrypto.a -o -name libssl.a) quiche/deps/boringssl/src/lib/
 
 Build curl:
 
@@ -130,7 +130,7 @@ Build curl:
      % git clone https://github.com/curl/curl
      % cd curl
      % autoreconf -fi
-     % ./configure LDFLAGS="-Wl,-rpath,$PWD/../quiche/target/release" --with-openssl=$PWD/../quiche/deps/boringssl/src --with-quiche=$PWD/../quiche/target/release
+     % ./configure LDFLAGS="-Wl,-rpath,$PWD/../quiche/target/release" --with-openssl=$PWD/../quiche/quiche/deps/boringssl/src --with-quiche=$PWD/../quiche/target/release
      % make
      % make install
 
@@ -147,3 +147,7 @@ Upgrade via Alt-Svc:
     curl --alt-svc altsvc.cache https://quic.aiortc.org/
 
 See this [list of public HTTP/3 servers](https://bagder.github.io/HTTP3-test/)
+
+## Known Bugs
+
+Check out the [list of known HTTP3 bugs](https://curl.se/docs/knownbugs.html#HTTP3).

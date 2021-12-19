@@ -23,10 +23,11 @@
 .SH NAME
 curl_multi_remove_handle - remove an easy handle from a multi session
 .SH SYNOPSIS
+.nf
 #include <curl/curl.h>
 
 CURLMcode curl_multi_remove_handle(CURLM *multi_handle, CURL *easy_handle);
-.ad
+.fi
 .SH DESCRIPTION
 Removes a given \fIeasy_handle\fP from the \fImulti_handle\fP. This will make
 the specified easy handle be removed from this multi handle's control.
@@ -47,7 +48,7 @@ msg = curl_multi_info_read(multi_handle, &queued);
 if(msg) {
   if(msg->msg == CURLMSG_DONE) {
     /* a transfer ended */
-    fprintf(stderr, "Transfer completed\n");
+    fprintf(stderr, "Transfer completed\\n");
     curl_multi_remove_handle(multi_handle, msg->easy_handle);
   }
 }

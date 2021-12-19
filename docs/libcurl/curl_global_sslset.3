@@ -23,8 +23,8 @@
 .SH NAME
 curl_global_sslset - Select SSL backend to use with libcurl
 .SH SYNOPSIS
-.B #include <curl/curl.h>
 .nf
+#include <curl/curl.h>
 
 typedef struct {
   curl_sslbackend id;
@@ -47,9 +47,9 @@ typedef enum {
   CURLSSLBACKEND_BEARSSL = 13
 } curl_sslbackend;
 
-.B "CURLsslset curl_global_sslset(curl_sslbackend " id,
-.B "                              const char *" name,
-.B "                              curl_ssl_backend ***" avail ");"
+CURLsslset curl_global_sslset(curl_sslbackend id,
+                              const char *name,
+                              curl_ssl_backend ***avail);
 .fi
 .SH DESCRIPTION
 This function configures at runtime which SSL backend to use with
@@ -81,7 +81,7 @@ attempt to change it will result in a \fBCURLSSLSET_TOO_LATE\fP.
 
 \fBThis function is not thread safe.\fP You must not call it when any other
 thread in the program (i.e. a thread sharing the same memory) is running.
-This doesn't just mean no other thread that is using libcurl.
+This does not just mean no other thread that is using libcurl.
 .SH EXAMPLE
 .nf
   /* choose a specific backend */
@@ -92,7 +92,7 @@ This doesn't just mean no other thread that is using libcurl.
   curl_global_sslset((curl_sslbackend)-1, NULL, &list);
 
   for(i = 0; list[i]; i++)
-    printf("SSL backend #%d: '%s' (ID: %d)\n",
+    printf("SSL backend #%d: '%s' (ID: %d)\\n",
            i, list[i]->name, list[i]->id);
 .fi
 .SH AVAILABILITY

@@ -20,7 +20,7 @@ changes over time.
 URL parsers as implemented in browsers, libraries and tools usually opt to
 support one of the mentioned specifications. Bugs, differences in
 interpretations and the moving nature of the WHATWG spec does however make it
-very unlikely that multiple parsers treat URLs the exact same way!
+unlikely that multiple parsers treat URLs the same way.
 
 ## Security
 
@@ -43,7 +43,7 @@ security concerns:
 1. If you have an application that runs as or in a server application, getting
    an unfiltered URL can trick your application to access a local resource
    instead of a remote resource. Protecting yourself against localhost accesses
-   is very hard when accepting user provided URLs.
+   is hard when accepting user provided URLs.
 
 2. Such custom URLs can access other ports than you planned as port numbers
    are part of the regular URL format. The combination of a local host and a
@@ -63,10 +63,13 @@ inter-operate better with URLs that appear in the wild.
 
 ### spaces
 
-In particular `Location:` headers that indicate to the client where a resource
-has been redirected to, sometimes contain spaces. This is a violation of RFC
-3986 but is fine in the WHATWG spec. curl handles these by re-encoding them to
-`%20`.
+A URL provided to curl cannot contain spaces. They need to be provided URL
+encoded to be accepted in a URL by curl.
+
+An exception to this rule: `Location:` response headers that indicate to a
+client where a resource has been redirected to, sometimes contain spaces. This
+is a violation of RFC 3986 but is fine in the WHATWG spec. curl handles these
+by re-encoding them to `%20`.
 
 ### non-ASCII
 
@@ -150,7 +153,7 @@ since it often means passing around the password in plain text and is thus a
 security risk.
 
 URLs for IMAP, POP3 and SMTP also support *login options* as part of the
-userinfo field. They're provided as a semicolon after the password and then
+userinfo field. they are provided as a semicolon after the password and then
 the options.
 
 ## Hostname
@@ -171,9 +174,9 @@ brackets). For example:
 
 ### "localhost"
 
-Starting in curl 7.77.0, curl will use loopback IP addresses for the name
-`localhost`: `127.0.0.1` and `::1`. It will not try to resolve the name using
-the resolver functions.
+Starting in curl 7.77.0, curl uses loopback IP addresses for the name
+`localhost`: `127.0.0.1` and `::1`. It does not resolve the name using the
+resolver functions.
 
 This is done to make sure the host accessed is truly the localhost - the local
 machine.
@@ -232,7 +235,7 @@ Anything else will make curl fail to parse the URL.
 
 ### Windows-specific FILE details
 
-curl accepts that the FILE URL's path starts with a "drive letter". That's a
+curl accepts that the FILE URL's path starts with a "drive letter". That is a
 single letter `a` to `z` followed by a colon or a pipe character (`|`).
 
 The Windows operating system itself will convert some file accesses to perform
@@ -296,7 +299,7 @@ MAILINDEX numbers returned then you could search via URL:
 
     imap://user:password@mail.example.com/INBOX?TEXT%20%22foo%20bar%22
 
-.. but if you wanted matching UID numbers you'd have to use a custom request:
+.. but if you wanted matching UID numbers you would have to use a custom request:
 
     imap://user:password@mail.example.com/INBOX -X "UID SEARCH TEXT \"foo bar\""
 

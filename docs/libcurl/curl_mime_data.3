@@ -23,11 +23,12 @@
 .SH NAME
 curl_mime_data - set a mime part's body data from memory
 .SH SYNOPSIS
-.B #include <curl/curl.h>
-.sp
-.BI "CURLcode curl_mime_data(curl_mimepart * " part ", const char * " data
-.BI ", size_t " datasize ");"
-.ad
+.nf
+#include <curl/curl.h>
+
+CURLcode curl_mime_data(curl_mimepart *part, const char *data,
+                        size_t datasize);
+.fi
 .SH DESCRIPTION
 \fIcurl_mime_data(3)\fP sets a mime part's body content from memory data.
 
@@ -42,7 +43,7 @@ Setting a part's contents twice is valid: only the value set by the last call
 is retained. It is possible to unassign part's contents by setting
 \fIdata\fP to NULL.
 
-Setting very large data is memory consuming: one might consider using
+Setting large data is memory consuming: one might consider using
 \fIcurl_mime_data_cb(3)\fP in such a case.
 .SH EXAMPLE
 .nf
